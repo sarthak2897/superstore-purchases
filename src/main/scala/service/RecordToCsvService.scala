@@ -7,6 +7,7 @@ import model.Record
 import java.io.{BufferedWriter, File, FileWriter}
 import java.text.SimpleDateFormat
 import java.util.Date
+import utility.Utility._
 
 object RecordToCsvService {
 
@@ -42,7 +43,7 @@ object RecordToCsvService {
         csvWriter.append("\n")
       }
     }catch {
-      case e : Exception => loggerActor ! Error(s"Some error occured while writing error messages to csv file : ${e}")
+      case e : Exception => loggerActor ! Error(s"Some error occurred while writing error messages to csv file : ${e}")
     }
     finally {
       if(csvWriter != null)
@@ -84,7 +85,7 @@ object RecordToCsvService {
     val file = new File(s"src/main/resources")
    // sinkFile = new BufferedWriter(new FileWriter(s"src/main/resources/${csvFile}", true))
    val files = file.listFiles()
-    val filteredFiles = files.filter(file => file.getName.contains("Furniture.csv"))
+    val filteredFiles = files.filter(file => file.getName.contains(config.getString("categorySinkFile")))
     if (filteredFiles.isEmpty) {
       val headings = Array("Order Date", "Ship Date", "Ship Mode", "Customer Name",
         "Segment", "Country", "City", "State", "Region", "Category", "Sub Category",
