@@ -26,10 +26,11 @@ object Utility {
   })
   //Accessing app.conf file
   //val config: Config = ConfigFactory.load("application.conf")
-val config: Config = ConfigFactory.load()
+  val config: Config = ConfigFactory.load()
+
   //Accessing the categoryFilter
   val categoryFilter: String = config.getString("categoryFilter")
-  loggerActor ! Info(categoryFilter)
+
   //Creating the category filter flow
   val categoryFilterFlow = Flow[Record].filter(_.category.equals(categoryFilter))
 

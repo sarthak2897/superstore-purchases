@@ -28,31 +28,36 @@ class MasterActor extends Actor with ActorLogging{
 //  }
 
   var routerRef : Router = null
-  override def receive: Receive = {
+  override def receive: Receive = initializeWorkers.orElse(childTerminated).orElse(readSuperstorePurchases)
 
-  case InitializeWorkers(noOfWorkers) => {
-    loggerActor !Info(s"Creating $noOfWorkers child actors")
-    val children = for (i <- 1 to noOfWorkers) yield {
-      val child = context.actorOf(Props[ChildActor], s"child-actor_$i")
-      context.watch(child)
-      ActorRefRoutee(child)
-    }
-    val router = Router(RoundRobinRoutingLogic(), children)
-    routerRef = router
-    sender() ! FetchSuperstorePurchases
+        def initializeWorkers : Receive = {
+          case InitializeWorkers(noOfWorkers) => {
+            loggerActor ! Info(s"Creating $noOfWorkers child actors")
+            val children = for (i <- 1 to noOfWorkers) yield {
+              val child = context.actorOf(Props[ChildActor], s"child-actor_$i")
+              context.watch(child)
+              ActorRefRoutee(child)
+            }
+            val router = Router(RoundRobinRoutingLogic(), children)
+            routerRef = router
+            sender() ! FetchSuperstorePurchases
+          }
+        }
+  def childTerminated : Receive = {
+    case Terminated(ref) =>
+      routerRef.removeRoutee(ref)
+      val newChild = context.actorOf(Props[ChildActor], "child_new")
+      context.watch(newChild)
+      routerRef.addRoutee(newChild)
   }
-  case Terminated(ref) =>
-    routerRef.removeRoutee(ref)
-    val newChild = context.actorOf(Props[ChildActor],"child_new")
-    context.watch(newChild)
-    routerRef.addRoutee(newChild)
+  def readSuperstorePurchases : Receive = {
+    case ReadSuperstorePurchases(record) =>
+      originalSender = sender()
+      val stringList = record.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)").toList
+      //loggerActor ! Info("forwarding data to child workers")
+      routerRef.route(Execute(stringList), originalSender)
+  }
 
-  case ReadSuperstorePurchases(record) =>
-    originalSender = sender()
-    val stringList = record.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)").toList
-    //loggerActor ! Info("forwarding data to child workers")
-      routerRef.route(Execute(stringList),originalSender)
-}
 }
 
 object MasterActor{
