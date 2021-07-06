@@ -2,8 +2,8 @@ package akkaActors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props, Terminated}
 import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
-import akkaActors.LoggerActor.Info
-import main.Main.loggerActor
+import akkaActors.LoggerActor.{Debug, Info}
+import akkaActors.Util.loggerActor
 
 class MasterActor extends Actor with ActorLogging{
   import MasterActor._
@@ -32,7 +32,8 @@ class MasterActor extends Actor with ActorLogging{
 
         def initializeWorkers : Receive = {
           case InitializeWorkers(noOfWorkers) => {
-            loggerActor ! Info(s"Creating $noOfWorkers child actors")
+           log.info(s"Creating $noOfWorkers child actors")
+            //loggerActor ! Info(s"Creating $noOfWorkers child actors")
             val children = for (i <- 1 to noOfWorkers) yield {
               val child = context.actorOf(Props[ChildActor], s"child-actor_$i")
               context.watch(child)
@@ -52,9 +53,10 @@ class MasterActor extends Actor with ActorLogging{
   }
   def readSuperstorePurchases : Receive = {
     case ReadSuperstorePurchases(record) =>
+      log.debug("forwarding data to child workers")
       originalSender = sender()
       val stringList = record.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)").toList
-      //loggerActor ! Info("forwarding data to child workers")
+     // loggerActor ! Debug("forwarding data to child workers")
       routerRef.route(Execute(stringList), originalSender)
   }
 

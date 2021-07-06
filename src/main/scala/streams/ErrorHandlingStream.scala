@@ -1,17 +1,16 @@
 package streams
 
 import akka.actor.ActorRef
-import akka.stream.{OverflowStrategy, SinkShape}
+import akka.stream.{ActorMaterializer, OverflowStrategy, SinkShape}
 import akka.stream.scaladsl.{Broadcast, GraphDSL, Sink, Source}
 import akkaActors.LoggerActor.Error
-import main.Main.loggerActor
 import main.Main.actorSystem
 import model.ErrorMessage
 import utility.Utility.{errorMessageFileSink, errorMessageLoggerSink}
 //import utility.Utility.{errorMessageFileSink, errorMessageLoggerSink}
 
 object ErrorHandlingStream {
-  implicit val materializer = actorSystem
+  implicit val materializer = ActorMaterializer()(actorSystem)
   val sourceActor : Source[ErrorMessage,ActorRef] = Source.actorRef(10,OverflowStrategy.dropHead)
 
 val errorGraph = Sink.fromGraph(GraphDSL.create(){

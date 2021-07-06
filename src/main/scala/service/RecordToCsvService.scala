@@ -1,7 +1,7 @@
 package service
 
 import akkaActors.LoggerActor.{Debug, Error, Info}
-import main.Main.loggerActor
+import akkaActors.Util.loggerActor
 import model.Record
 
 import java.io.{BufferedWriter, File, FileWriter}

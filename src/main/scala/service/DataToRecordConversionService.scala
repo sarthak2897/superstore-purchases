@@ -1,7 +1,7 @@
 package service
 
 import akkaActors.LoggerActor.Info
-import main.Main.loggerActor
+
 import model.Record
 
 import java.text.SimpleDateFormat

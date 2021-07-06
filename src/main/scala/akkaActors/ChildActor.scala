@@ -1,8 +1,8 @@
 package akkaActors
 
 import akka.actor.{Actor, ActorLogging, ActorRef}
-import akkaActors.LoggerActor.Info
-import main.Main.loggerActor
+import akkaActors.LoggerActor.{Debug, Info}
+import akkaActors.Util.loggerActor
 import service.{DataToRecordConversionService, ValidatePurchasesService}
 import streams.ErrorHandlingStream.errorRef
 //import streams.ErrorHandlingStream.errorRef
@@ -16,6 +16,7 @@ class ChildActor extends Actor with ActorLogging{
 
     def execute : Receive = {
       case Execute(purchase) =>
+        loggerActor ! Debug("Inside child actor")
         self ! ValidateData(purchase)
     }
 
@@ -35,7 +36,6 @@ class ChildActor extends Actor with ActorLogging{
     }
 }
 object ChildActor{
-  //case class Execute(record : String,sender : ActorRef)
   case class Execute(record : List[String])
   case class ValidateData(record : List[String])
   case class ProcessStream(record : List[String])

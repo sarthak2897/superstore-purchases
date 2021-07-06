@@ -1,0 +1,155 @@
+[debug] > Exec(;reload; set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download resolveClassifiers" ;*/*:dumpStructureTo C:/Users/sartnagpal/AppData/Local/Temp/sbt-structure.xml; session clear-all ; set ideaPort in Global := 63538, None, None)
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.5.4 (Amazon.com Inc. Java 1.8.0_292)
+[debug]       Load.loadUnit: plugins took 47.1842ms
+[debug]       Load.loadUnit: defsScala took 0.0106ms
+[debug] [Loading] Scanning directory C:\Users\sartnagpal\.sbt\1.0\plugins
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\sartnagpal\.sbt\1.0\plugins, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 2.0129 ms
+[debug]           Load.resolveProject(global-plugins) took 2.4169ms
+[debug]         Load.loadTransitive: finalizeProject(Project(id global-plugins, base: C:\Users\sartnagpal\.sbt\1.0\plugins, plugins: List(<none>))) took 5.1905ms
+[debug] [Loading] Done in C:\Users\sartnagpal\.sbt\1.0\plugins, returning: (global-plugins)
+[debug]       Load.loadUnit: loadedProjectsRaw took 7.1675ms
+[debug]       Load.loadUnit: cleanEvalClasses took 0.0183ms
+[debug]     Load.loadUnit(file:/C:/Users/sartnagpal/.sbt/1.0/plugins/, ...) took 55.6781ms
+[debug]   Load.apply: load took 59.4618ms
+[debug]   Load.apply: resolveProjects took 0.2092ms
+[debug]   Load.apply: finalTransforms took 14.1536ms
+[debug]   Load.apply: config.delegates took 1.3509ms
+[debug]   Load.apply: Def.make(settings)... took 96.7687ms
+[debug]   Load.apply: structureIndex took 34.5294ms
+[debug]   Load.apply: mkStreams took 0.0124ms
+[info] loading global plugins from C:\Users\sartnagpal\.sbt\1.0\plugins
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug] Load.defaultLoad until apply took 546.1229ms
+[debug]           Load.loadUnit: plugins took 27.3258ms
+[debug]           Load.loadUnit: defsScala took 0.004ms
+[debug] [Loading] Scanning directory C:\Scala\AkkaAssignment\project
+[debug]             Load.loadUnit: mkEval took 0.6492ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Scala\AkkaAssignment\project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 1.1308 ms
+[info] loading settings for project akkaassignment-build from idea2.sbt ...
+[debug]               Load.resolveProject(akkaassignment-build) took 1.7562ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id akkaassignment-build, base: C:\Scala\AkkaAssignment\project, plugins: List(<none>))) took 3.4407ms
+[debug] [Loading] Done in C:\Scala\AkkaAssignment\project, returning: (akkaassignment-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 27.5181ms
+[debug]           Load.loadUnit: cleanEvalClasses took 1.5166ms
+[debug]         Load.loadUnit(file:/C:/Scala/AkkaAssignment/project/, ...) took 57.167ms
+[debug]       Load.apply: load took 58.7537ms
+[debug]       Load.apply: resolveProjects took 0.1188ms
+[debug]       Load.apply: finalTransforms took 4.0994ms
+[debug]       Load.apply: config.delegates took 0.329ms
+[debug]       Load.apply: Def.make(settings)... took 54.0291ms
+[debug]       Load.apply: structureIndex took 19.6872ms
+[debug]       Load.apply: mkStreams took 0.007ms
+[info] loading project definition from C:\Scala\AkkaAssignment\project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug]     Load.loadUnit: plugins took 317.4419ms
+[debug]     Load.loadUnit: defsScala took 0.005ms
+[debug] [Loading] Scanning directory C:\Scala\AkkaAssignment
+[debug]       Load.loadUnit: mkEval took 0.4516ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Scala\AkkaAssignment, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.StructurePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.IdeaShellPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.StructurePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.IdeaShellPlugin)))
+[debug] Clause(And(Set(Atom(sbt.plugins.CorePlugin), Atom(sbt.plugins.JvmPlugin))),Set(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.SemanticdbPlugin,org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin,sbt.plugins.JUnitXmlReportPlugin,org.jetbrains.sbt.IdeaShellPlugin,org.jetbrains.sbt.StructurePlugin,sbt.plugins.MiniDependencyTreePlugin)
+[debug] Plugins.deducer#function took 1.9597 ms
+[info] loading settings for project akkaassignment from build.sbt ...
+[debug]         Load.resolveProject(akkaassignment) took 40.1461ms
+[debug]       Load.loadTransitive: finalizeProject(Project(id akkaassignment, base: C:\Scala\AkkaAssignment, plugins: List(<none>))) took 42.9179ms
+[debug] [Loading] Done in C:\Scala\AkkaAssignment, returning: (akkaassignment)
+[debug]     Load.loadUnit: loadedProjectsRaw took 126.8296ms
+[debug]     Load.loadUnit: cleanEvalClasses took 9.2345ms
+[debug]   Load.loadUnit(file:/C:/Scala/AkkaAssignment/, ...) took 454.3143ms
+[debug] Load.apply: load took 456.8407ms
+[debug] Load.apply: resolveProjects took 0.2218ms
+[debug] Load.apply: finalTransforms took 14.6965ms
+[debug] Load.apply: config.delegates took 0.9524ms
+[debug] Load.apply: Def.make(settings)... took 70.0158ms
+[debug] Load.apply: structureIndex took 42.1194ms
+[debug] Load.apply: mkStreams took 0.0048ms
+[warn] Discarding 1 session setting.  Use 'session save' to persist session settings.
+[info] set current project to AkkaAssignment (in build file:/C:/Scala/AkkaAssignment/)
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download resolveClassifiers", None, None)
+[info] Defining Global / sbtStructureOptions
+[info] The new value will be used by Global / ssOptions
+[debug] Defining 
+[debug] 	Global / sbtStructureOptions
+[debug] 
+[debug] The new value will be used by 
+[debug] 	Global / ssOptions
+[info] Reapplying settings...
+[info] set current project to AkkaAssignment (in build file:/C:/Scala/AkkaAssignment/)
+[debug] > Exec(*/*:dumpStructureTo C:/Users/sartnagpal/AppData/Local/Temp/sbt-structure.xml, None, None)
+[debug] Evaluating tasks: Global / dumpStructureTo
+[warn] sbt 0.13 shell syntax is deprecated; use slash syntax instead: Global / dumpStructureTo
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] Writing structure to C:\Users\sartnagpal\AppData\Local\Temp\sbt-structure.xml...
+[info] Done.
+[success] Total time: 16 s, completed Jul 3, 2021 9:53:41 PM
+[debug] > Exec(session clear-all, None, None)
+[info] Reapplying settings...
+[info] set current project to AkkaAssignment (in build file:/C:/Scala/AkkaAssignment/)
+[debug] > Exec(set ideaPort in Global := 63538, None, None)
+[info] Defining Global / ideaPort
+[info] The new value will be used by Compile / compile, Test / compile
+[debug] Defining 
+[debug] 	Global / ideaPort
+[debug] 
+[debug] The new value will be used by 
+[debug] 	Compile / compile
+[debug] 	Test / compile
+[info] Reapplying settings...
+[info] set current project to AkkaAssignment (in build file:/C:/Scala/AkkaAssignment/)
+[debug] > Exec(idea-shell, None, None)
+[debug] > Exec(, None, None)
+[debug] > Exec(idea-shell, None, None)

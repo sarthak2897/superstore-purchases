@@ -2,7 +2,8 @@ package akkaActors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akkaActors.LoggerActor.Info
-import main.Main.loggerActor
+import akkaActors.Util.loggerActor
+
 
 import java.io.File
 import scala.io.Source
@@ -15,13 +16,15 @@ class SuperStoreActor extends Actor with ActorLogging{
 
     def initializeMaster : Receive ={
       case InitializeMaster(noOfWorkers) =>
-        loggerActor ! Info("Creating master actor")
+        log.info("Creating master actor")
+    //    loggerActor ! Info("Creating master actor")
         masterActor ! InitializeWorkers(noOfWorkers)
     }
 
   def fetchSuperstorePurchases : Receive ={
     case FetchSuperstorePurchases =>
-      loggerActor ! Info("Sending csv data to master actor")
+      log.info("Sending csv data to master")
+     // loggerActor ! Info("Sending csv data to master actor")
       val superStoreData = "C:\\Users\\sartnagpal\\Downloads\\Superstore_purchases.csv"
       Source.fromFile(new File(superStoreData)).getLines().drop(1).foreach(masterActor ! ReadSuperstorePurchases(_))
 
