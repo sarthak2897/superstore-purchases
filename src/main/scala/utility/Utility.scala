@@ -11,6 +11,7 @@ import model.{ErrorMessage, FiguresAggregator, Record}
 import service.RecordToCsvService
 
 import java.text.SimpleDateFormat
+import java.util.Properties
 
 object Utility {
 
@@ -30,9 +31,12 @@ object Utility {
   //val config: Config = ConfigFactory.load("application.conf")
   val config: Config = ConfigFactory.load()
 
+//  val properties = new Properties
+//  properties.load(this.getClass.getResourceAsStream("src/main/resources/superstore.properties"))
   //Accessing the categoryFilter
   val categoryFilter: String = config.getString("categoryFilter")
-
+//  val categoryFilter = properties.getProperty("categoryFilter")
+  loggerActor ! Info(categoryFilter)
   //Creating the category filter flow
   val categoryFilterFlow = Flow[Record].filter(_.category.equals(categoryFilter))
 

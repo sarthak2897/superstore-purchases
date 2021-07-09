@@ -36,7 +36,8 @@ object ValidatePurchasesService{
     }
     triedDate match {
       case Success(value) => if(value == null) false else true
-      case Failure(exception) =>loggerActor ! Error("Error occurred in validating date: "+exception)
+      case Failure(exception) =>
+        //loggerActor ! Error("Error occurred in validating date: "+exception)
         false
        }
     }

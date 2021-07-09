@@ -11,7 +11,6 @@ import streams.PurchaseProcessingStream.{bulkReportRef, purchaseProcessingRef}
 class ChildActor extends Actor with ActorLogging{
   import ChildActor._
   import SuperStoreActor._
-  var count = 0;
   override def receive: Receive = execute.orElse(validateData).orElse(processData)
 
     def execute : Receive = {

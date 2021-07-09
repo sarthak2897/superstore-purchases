@@ -2,10 +2,11 @@ package akkaActors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props, Terminated}
 import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
+import akkaActors.ChildActorFSM.{ExecuteProcess, ProcessValidStream, ValidateStream}
 import akkaActors.LoggerActor.{Debug, Info}
 import akkaActors.Util.loggerActor
 
-class MasterActor extends Actor with ActorLogging{
+class MasterActor(parent : ActorRef) extends Actor with ActorLogging{
   import MasterActor._
   import ChildActor._
   var childrenRef : Seq[ActorRef]= Seq()
@@ -28,7 +29,7 @@ class MasterActor extends Actor with ActorLogging{
 //  }
 
   var routerRef : Router = null
-  override def receive: Receive = initializeWorkers.orElse(childTerminated).orElse(readSuperstorePurchases)
+  override def receive: Receive = initializeWorkers.orElse(childTerminated).orElse(readSuperstorePurchases).orElse(validateData).orElse(processValidData)
 
         def initializeWorkers : Receive = {
           case InitializeWorkers(noOfWorkers) => {
@@ -41,7 +42,7 @@ class MasterActor extends Actor with ActorLogging{
             }
             val router = Router(RoundRobinRoutingLogic(), children)
             routerRef = router
-            sender() ! FetchSuperstorePurchases
+            parent ! FetchSuperstorePurchases
           }
         }
   def childTerminated : Receive = {
@@ -57,13 +58,23 @@ class MasterActor extends Actor with ActorLogging{
       originalSender = sender()
       val stringList = record.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)").toList
      // loggerActor ! Debug("forwarding data to child workers")
-      routerRef.route(Execute(stringList), originalSender)
+      routerRef.route(Execute(stringList), self)
   }
 
+  def validateData : Receive = {
+    case ValidatePurchase => routerRef.route(ValidateStream,self)
+  }
+
+  def processValidData : Receive = {
+  case ProcessValidPurchase => routerRef.route(ProcessValidStream,self)
+  }
 }
 
 object MasterActor{
   case class InitializeWorkers(workers : Int)
   case object FetchSuperstorePurchases
   case class ReadSuperstorePurchases(record : String)
+  case object ValidatePurchase
+  case object ProcessValidPurchase
+  //def props(parent: ActorRef): Props = Props(new MasterActor(parent))
 }
