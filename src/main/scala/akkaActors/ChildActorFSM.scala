@@ -1,11 +1,8 @@
 package akkaActors
 
 import akka.actor.FSM
-import akkaActors.ChildActor.ValidateData
-import akkaActors.LoggerActor.{Debug, Error, Info}
-import akkaActors.MasterActor.{ProcessValidPurchase, ValidatePurchase}
+import akkaActors.LoggerActor.Error
 import akkaActors.Util.loggerActor
-import io.netty.handler.timeout.IdleState
 import model.ErrorMessage
 import service.{DataToRecordConversionService, ValidatePurchasesService}
 import streams.ErrorHandlingStream.errorRef
@@ -63,11 +60,11 @@ class ChildActorFSM extends FSM[ChildState,ChildData] {
 
   when(ProcessValidData){
     case Event(ProcessValidStream, CsvFileData(purchase)) =>{
-      log.info("Validation successful. Processing purchase to Record case class.")
+    //  log.info("Validation successful. Processing purchase to Record case class.")
       val purchaseRecord = DataToRecordConversionService.convert(purchase)
       purchaseProcessingRef ! purchaseRecord
       bulkReportRef ! purchaseRecord
-      log.info("Processing complete!")
+     // log.info("Processing complete!")
       goto(Idle) using (UninitializedData)
     }
   }

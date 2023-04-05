@@ -1,18 +1,16 @@
 package akkaActors
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import akka.actor.{Actor, ActorLogging, Props}
 import akkaActors.ChildActorFSM.{ExecuteProcess, ProcessValidStream, ValidateStream}
-import akkaActors.LoggerActor.Info
 import akkaActors.MasterActorFSM.InitializeChildWorkers
-import akkaActors.Util.loggerActor
-import main.Main.dataActor
+import com.typesafe.config.ConfigFactory
 
 import java.io.File
 import scala.io.Source
 
 class SuperStoreActor extends Actor with ActorLogging{
-  import SuperStoreActor._
   import MasterActor._
+  import SuperStoreActor._
   //val masterActor = context.actorOf(Props(new MasterActor(dataActor)),"master")
   val masterActor = context.actorOf(Props[MasterActorFSM],"masterFSMActor")
   override def receive: Receive = initializeMaster.orElse(fetchSuperstorePurchases)
@@ -29,8 +27,10 @@ class SuperStoreActor extends Actor with ActorLogging{
   def fetchSuperstorePurchases : Receive ={
     case FetchSuperstorePurchases =>
       log.info("Sending csv data to master")
+      val propConfig = ConfigFactory.load("superstore.properties")
       //loggerActor ! Info("Sending csv data to master actor")
-      val superStoreData = "C:\\Users\\sartnagpal\\Downloads\\Superstore_purchases.csv"
+      val superStoreData = propConfig.getString("fileName")
+      log.info(superStoreData)
       //Source.fromFile(new File(superStoreData)).getLines().drop(1).foreach(masterActor ! ReadSuperstorePurchases(_))
       //val stringList = record.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)").toList
       Source.fromFile(new File(superStoreData)).getLines().drop(1).foreach{

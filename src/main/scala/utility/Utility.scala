@@ -6,12 +6,11 @@ import akkaActors.LoggerActor.{Debug, Error, Info}
 import akkaActors.Util.loggerActor
 import com.typesafe.config.{Config, ConfigFactory}
 import main.Main._
-import model.FiguresAggregator.{count, discount, profit, quantity, sales}
+import model.FiguresAggregator._
 import model.{ErrorMessage, FiguresAggregator, Record}
 import service.RecordToCsvService
 
 import java.text.SimpleDateFormat
-import java.util.Properties
 
 object Utility {
 
@@ -30,12 +29,10 @@ object Utility {
   //Accessing app.conf file
   //val config: Config = ConfigFactory.load("application.conf")
   val config: Config = ConfigFactory.load()
-
-//  val properties = new Properties
-//  properties.load(this.getClass.getResourceAsStream("src/main/resources/superstore.properties"))
+  //val propConfig = ConfigFactory.load("superstore.properties")
   //Accessing the categoryFilter
   val categoryFilter: String = config.getString("categoryFilter")
-//  val categoryFilter = properties.getProperty("categoryFilter")
+  //val categoryFilter = propConfig.getString("categoryFilter")
   loggerActor ! Info(categoryFilter)
   //Creating the category filter flow
   val categoryFilterFlow = Flow[Record].filter(_.category.equals(categoryFilter))

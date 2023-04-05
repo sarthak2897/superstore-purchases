@@ -3,9 +3,9 @@ name := "AkkaAssignment"
 version := "0.1"
 
 scalaVersion := "2.13.6"
+lazy val akkaVersion = "2.5.23"
 
 //lazy val akkaVersion = "2.6.15"
-lazy val akkaVersion = "2.5.23"
 lazy val cassandraVersion = "0.101"
 
 libraryDependencies ++= Seq(
