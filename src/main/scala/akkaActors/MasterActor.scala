@@ -2,13 +2,11 @@ package akkaActors
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props, Terminated}
 import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
-import akkaActors.ChildActorFSM.{ExecuteProcess, ProcessValidStream, ValidateStream}
-import akkaActors.LoggerActor.{Debug, Info}
-import akkaActors.Util.loggerActor
+import akkaActors.ChildActorFSM.{ProcessValidStream, ValidateStream}
 
 class MasterActor(parent : ActorRef) extends Actor with ActorLogging{
-  import MasterActor._
   import ChildActor._
+  import MasterActor._
   var childrenRef : Seq[ActorRef]= Seq()
   var originalSender : ActorRef = null
 
@@ -76,5 +74,6 @@ object MasterActor{
   case class ReadSuperstorePurchases(record : String)
   case object ValidatePurchase
   case object ProcessValidPurchase
+  //case object ProcessComplete
   //def props(parent: ActorRef): Props = Props(new MasterActor(parent))
 }

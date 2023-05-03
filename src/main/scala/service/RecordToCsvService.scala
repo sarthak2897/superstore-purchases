@@ -1,13 +1,13 @@
 package service
 
 import akkaActors.LoggerActor.{Debug, Error, Info}
-import akkaActors.Util.loggerActor
+import main.Main.loggerActor
 import model.Record
+import utility.Utility._
 
-import java.io.{BufferedWriter, File, FileWriter}
+import java.io.{File, FileWriter}
 import java.text.SimpleDateFormat
 import java.util.Date
-import utility.Utility._
 
 object RecordToCsvService {
 

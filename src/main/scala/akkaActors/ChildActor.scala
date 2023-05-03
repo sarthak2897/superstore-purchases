@@ -1,8 +1,8 @@
 package akkaActors
 
-import akka.actor.{Actor, ActorLogging, ActorRef}
-import akkaActors.LoggerActor.{Debug, Info}
-import akkaActors.Util.loggerActor
+import akka.actor.{Actor, ActorLogging}
+import akkaActors.LoggerActor.Debug
+import main.Main.loggerActor
 import service.{DataToRecordConversionService, ValidatePurchasesService}
 import streams.ErrorHandlingStream.errorRef
 //import streams.ErrorHandlingStream.errorRef
@@ -10,7 +10,6 @@ import streams.PurchaseProcessingStream.{bulkReportRef, purchaseProcessingRef}
 
 class ChildActor extends Actor with ActorLogging{
   import ChildActor._
-  import SuperStoreActor._
   override def receive: Receive = execute.orElse(validateData).orElse(processData)
 
     def execute : Receive = {

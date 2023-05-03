@@ -2,7 +2,7 @@ package akkaActors
 
 import akka.persistence.{PersistentActor, RecoveryCompleted}
 import akkaActors.LoggerActor.{Debug, Info}
-import akkaActors.Util.loggerActor
+import main.Main.loggerActor
 import model.Record
 
 class CassandraActor extends PersistentActor {

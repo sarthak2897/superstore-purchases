@@ -1,7 +1,7 @@
 package service
 
 import akkaActors.LoggerActor.Debug
-import akkaActors.Util.loggerActor
+import main.Main.loggerActor
 import model.ErrorMessage
 
 import java.text.SimpleDateFormat
@@ -16,7 +16,7 @@ object ValidatePurchasesService {
     loggerActor ! Debug("Starting validation of the record")
 
     var errorList: ListBuffer[ErrorMessage] = ListBuffer()
-    if (record(0).isEmpty || !isDateValid(record(0)))
+    if (record.head.isEmpty || !isDateValid(record.head))
       errorList += ErrorMessage(record.mkString("-"), "Order Date not found " +
         "or has invalid format", "Order Date")
     if (record(1).isEmpty || !isDateValid(record(1)))

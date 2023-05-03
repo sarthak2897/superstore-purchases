@@ -3,9 +3,8 @@ package utility
 import akka.stream.OverflowStrategy
 import akka.stream.scaladsl.{Flow, Sink, Source}
 import akkaActors.LoggerActor.{Debug, Error, Info}
-import akkaActors.Util.loggerActor
 import com.typesafe.config.{Config, ConfigFactory}
-import main.Main._
+import main.Main.loggerActor
 import model.FiguresAggregator._
 import model.{ErrorMessage, FiguresAggregator, Record}
 import service.RecordToCsvService
@@ -33,7 +32,6 @@ object Utility {
   //Accessing the categoryFilter
   val categoryFilter: String = config.getString("categoryFilter")
   //val categoryFilter = propConfig.getString("categoryFilter")
-  loggerActor ! Info(categoryFilter)
   //Creating the category filter flow
   val categoryFilterFlow = Flow[Record].filter(_.category.equals(categoryFilter))
 
@@ -41,10 +39,10 @@ object Utility {
   val categoryFilterSink = Sink.foreach[Record](record => RecordToCsvService.writeToCSVFile(record,config.getString("categorySinkFile")))
 
   //Creating sink for writing data to Cassandra DB
-  val cassandraCategorySink = Sink.foreach[Record](record =>{
-    loggerActor ! Debug("Inside cassandraCategorySink")
-    cassandraActor ! record.toString.split(";").toList
-  })
+//  val cassandraCategorySink = Sink.foreach[Record](record =>{
+//    loggerActor ! Debug("Inside cassandraCategorySink")
+//    cassandraActor ! record.toString.split(";").toList
+//  })
 
   // Financial Year filter flow
   val financialYearFilterFlow = Flow[Record].filter(record => new SimpleDateFormat("yyyy").format(record.orderDate).toInt == config.getInt("FinancialYear"))
@@ -59,30 +57,30 @@ object Utility {
   })
 
   //Creating sink for writing data to Cassandra DB
-  val cassandraAggregatorSink = Sink.foreach[Record](record => {
-    loggerActor ! Debug("Inside cassandraAggregatorSink")
-    cassandraActor ! List(new SimpleDateFormat("yyyy").format(record.orderDate),record.category,formatValue(sales),quantity.toString,formatValue(discount),formatValue(profit),count.toString)
-  })
+//  val cassandraAggregatorSink = Sink.foreach[Record](record => {
+//    loggerActor ! Debug("Inside cassandraAggregatorSink")
+//    cassandraActor ! List(new SimpleDateFormat("yyyy").format(record.orderDate),record.category,formatValue(sales),quantity.toString,formatValue(discount),formatValue(profit),count.toString)
+//  })
     //Quantity filter flow
   val quantityFilterFlow = Flow[Record].filter(_.quantity > config.getInt("BulkQuantityValue"))
 
   // Creating the Yearly Bulk Financial Report
   val bulkFinancialReportSink = Sink.foreach[Record](record =>{
-    loggerActor ! Debug("Creating bulk financial report")
+    loggerActor ! Info("Creating bulk financial report")
 
     val fileContents = List(new SimpleDateFormat("yyyy").format(record.orderDate),formatValue(sales),formatValue(sales/count),quantity.toString,formatValue(quantity/count),formatValue(discount),formatValue(discount/count),formatValue(profit),formatValue(profit/count),count.toString)
 
     //Computing the total and average of the metrics
     FiguresAggregator.aggregate(record.sales,record.quantity,record.discount,record.profit)
     //Writing to csv files
-    RecordToCsvService.writeToCSVFile(fileContents,config.getString("BulkProductInsightSinkFile"),true)
+    RecordToCsvService.writeToCSVFile(fileContents,config.getString("BulkProductInsightSinkFile"),isBulkReport = true)
   })
 
   //Creating sink for writing data to Cassandra DB
-  val cassandraFinancialReportSink = Sink.foreach[Record](record => {
-    loggerActor ! Debug("Inside cassandraFinancialReportSink")
-    cassandraActor ! List(new SimpleDateFormat("yyyy").format(record.orderDate),formatValue(sales),formatValue(sales/count),quantity.toString,formatValue(quantity/count),formatValue(discount),formatValue(discount/count),formatValue(profit),formatValue(profit/count),count.toString)
-  })
+//  val cassandraFinancialReportSink = Sink.foreach[Record](record => {
+//    loggerActor ! Debug("Inside cassandraFinancialReportSink")
+//    cassandraActor ! List(new SimpleDateFormat("yyyy").format(record.orderDate),formatValue(sales),formatValue(sales/count),quantity.toString,formatValue(quantity/count),formatValue(discount),formatValue(discount/count),formatValue(profit),formatValue(profit/count),count.toString)
+//  })
 
 
 
